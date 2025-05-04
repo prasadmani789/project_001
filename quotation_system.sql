@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: quotation_systems
+-- Host: localhost    Database: quotation_system
 -- ------------------------------------------------------
--- Server version	8.0.41
+-- Server version	8.0.42
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +30,7 @@ CREATE TABLE `customers` (
   `email` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'John Doe','123 Main St, Citymm mangalore','9876543210','john@example.com'),(2,'Jane Smith','456 Market St, City','8765432109','jane@example.com'),(3,'Ranjith Kumar','Kattemajal House\r\n\r\nPuttur','989999900','ranjith@gmail.com'),(4,'Rashmi','jgjgjh  fhf n \r\n\r\nhgfh jh puttur','87678678698','rashmi@gmail.com'),(5,'yuiih jhh','jkhkjh jkhjk','890980','hjhj@gmail.com');
+INSERT INTO `customers` VALUES (6,'Prasad M','hhsf jhsf fkf','9892484747','ppp@gmail.com'),(7,'ranju','khkfd skhdf sdgksd','9797878788','ooo@gmail.com');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,8 +55,6 @@ CREATE TABLE `products` (
   `name` varchar(100) NOT NULL,
   `description` text,
   `price` decimal(10,2) NOT NULL,
-  `hsn_code` varchar(20) NOT NULL DEFAULT 'N/A',
-  `height` varchar(20) NOT NULL,
   `gst_percent` decimal(5,2) DEFAULT '0.00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -68,7 +66,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES ('P001','Laptop','High-performance laptop repairs jja ',55000.00,'','',0.00),('P00110','Celerio','The Maruti Suzuki Celerio is a compact, fuel-efficient hatchback known for its practical design, affordability, and a spacious interior, available in petrol and CNG variants with both manual and automatic transmissions. \r\nHere\'s a more detailed description:\r\nFuel Efficiency:\r\nThe Celerio is renowned for its impressive fuel economy, making it a great choice for city driving and commutes. \r\nEngine Options:\r\nPetrol: It\'s powered by a 1.0-liter K10C petrol engine, offering a good balance of power and efficiency. \r\nCNG: A CNG variant is also available, further enhancing fuel economy. ',750000.00,'GKL001','6 Feet',15.00),('P002','Mouse','Wireless Optical Mouse',1200.00,'','',0.00),('P003','Keyboard','Mechanical Gaming Keyboard',3500.00,'','',0.00),('P004','Apache','TVS Apache is a bike .\r\n\r\nIt is available with various models.',155555.00,'','',0.00),('P005','Scooter','scooter is a vehicle.\r\n\r\navaialble in multilple models',123500.00,'','',0.00),('P011','Cycle','kjsf lsjf lsfl \r\nsf klsf ',16788.00,'989','87',12.00);
+INSERT INTO `products` VALUES ('P001','Bike','Bike TVS',100000.00,12.00),('P002','Car','Maruthi Car',895000.00,18.00),('P003','Cycle','TTT Cycle',55000.00,15.00);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +88,7 @@ CREATE TABLE `quotation_items` (
   CONSTRAINT `quotation_items_ibfk_1` FOREIGN KEY (`quotation_id`) REFERENCES `quotations` (`id`) ON DELETE CASCADE,
   CONSTRAINT `quotation_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
   CONSTRAINT `quotation_items_chk_1` CHECK ((`quantity` > 0))
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +97,7 @@ CREATE TABLE `quotation_items` (
 
 LOCK TABLES `quotation_items` WRITE;
 /*!40000 ALTER TABLE `quotation_items` DISABLE KEYS */;
-INSERT INTO `quotation_items` VALUES (1,1,'P004',2),(2,1,'P002',1),(3,1,'P003',10),(4,2,'P001',1),(5,2,'P002',2),(6,2,'P004',1),(7,3,'P001',1),(8,3,'P002',3),(9,3,'P003',3),(10,4,'P011',12),(11,4,'P005',1),(13,6,'P00110',2),(14,6,'P004',1),(15,6,'P011',3),(16,7,'P00110',1),(17,8,'P004',1),(18,8,'P011',1);
+INSERT INTO `quotation_items` VALUES (19,9,'P001',2),(20,9,'P002',1),(21,10,'P003',5),(22,10,'P001',3);
 /*!40000 ALTER TABLE `quotation_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +115,7 @@ CREATE TABLE `quotations` (
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`),
   CONSTRAINT `quotations_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +124,7 @@ CREATE TABLE `quotations` (
 
 LOCK TABLES `quotations` WRITE;
 /*!40000 ALTER TABLE `quotations` DISABLE KEYS */;
-INSERT INTO `quotations` VALUES (1,1,'2025-03-21'),(2,4,'2025-03-21'),(3,3,'2025-03-21'),(4,5,'2025-03-22'),(6,2,'2025-03-27'),(7,1,'2025-03-27'),(8,2,'2025-03-27');
+INSERT INTO `quotations` VALUES (9,6,'2025-05-03'),(10,7,'2025-05-04');
 /*!40000 ALTER TABLE `quotations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-27 17:33:58
+-- Dump completed on 2025-05-04 17:58:40
